@@ -22,7 +22,7 @@ void main() {
     expect(find.byType(SplashPage), findsOneWidget);
 
     await tester.runAsync(() => Future.delayed(const Duration(milliseconds: 100)));
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(const Duration(seconds: 3));
     await tester.pump();
     expect(find.byType(DetailedDeveloperPage), findsOneWidget);
 

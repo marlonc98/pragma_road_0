@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_perfil_dev/domain/entities/developer_entity.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/detailed_developer_page_view_model.dart';
-import 'package:mi_perfil_dev/presentation/pages/developer/detailed/widgets/developer_feature_item_widget.dart';
 import 'package:mi_perfil_dev/presentation/widgets/loader_screen_widget.dart';
 
 class DetailedDeveloperPageScreen extends StatelessWidget {
@@ -11,9 +10,7 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(vm.developer.data?.name ?? 'Desarrollador'),
-      ),
+      appBar: AppBar(title: Text(vm.developer.data?.name ?? '')),
       body: _buildBody(context),
     );
   }
@@ -33,7 +30,9 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
       width: double.infinity,
       child: const Icon(Icons.person, size: 120),
     );
-    return Column(
+    final bio = developer.bio;
+    return ListView(
+      padding: EdgeInsets.zero,
       children: [
         developer.profileImageUrl == null
             ? placeholder
@@ -44,67 +43,21 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) => placeholder,
               ),
-        Expanded(
-          child: Container(
-            transform: Matrix4.translationValues(0, -20, 0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              height: 40,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-                gradient: LinearGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.primary
-                        .withValues(alpha: 0.5),
-                    Theme.of(context).colorScheme.primary
-                        .withValues(alpha: 0.1),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: const Alignment(0, 0.01),
-                ),
-              ),
-              child: ListView(
-                children: [
-                  ListTile(
-                    title: const Text('Correo'),
-                    subtitle: Text(developer.email),
-                  ),
-                  if (developer.bio != null)
-                    ListTile(
-                      title: const Text('Biografía'),
-                      subtitle: Text(developer.bio!),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final value in [developer.role, bio, developer.email])
+                if (value != null && value.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      value,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    alignment: WrapAlignment.spaceBetween,
-                    runSpacing: 8,
-                    children: [
-                      DeveloperFeatureItemWidget(
-                        title: 'Rol',
-                        value: developer.role,
-                        icon: Icons.work,
-                      ),
-                      DeveloperFeatureItemWidget(
-                        title: 'Contratado',
-                        value: developer.hired ? 'Sí' : 'No',
-                        icon: Icons.handshake,
-                      ),
-                    ],
                   ),
-                ],
-              ),
-            ),
+            ],
           ),
         ),
       ],
