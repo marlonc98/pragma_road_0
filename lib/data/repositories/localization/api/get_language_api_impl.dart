@@ -1,8 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-List<String> _options = [
-  "es"
-];
+List<String> _options = ["es"];
 
 Future<String> getLanguageApiImpl(String keyShared) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

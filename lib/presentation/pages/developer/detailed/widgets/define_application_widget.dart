@@ -93,10 +93,8 @@ class _HiredButton extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 label,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: _color,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.labelLarge
+                    ?.copyWith(color: _color, fontWeight: FontWeight.bold),
               ),
             ],
           ),

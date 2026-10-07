@@ -22,12 +22,12 @@ final localizationRepositoryProvider = Provider<LocalizationRepository>(
 //#region ------------- States -------------------------//
 final developerStateProvider =
     NotifierProvider<DeveloperStateImpl, DeveloperEntity?>(
-  DeveloperStateImpl.new,
-);
+      DeveloperStateImpl.new,
+    );
 final localizationStateProvider =
     NotifierProvider<LocalizationStateImpl, Map<String, String>>(
-  LocalizationStateImpl.new,
-);
+      LocalizationStateImpl.new,
+    );
 //#endregion ---------- States ------------------------//
 
 //#region ------------- use cases -------------------------//

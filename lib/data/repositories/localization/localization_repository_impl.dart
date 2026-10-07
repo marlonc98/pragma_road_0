@@ -6,9 +6,9 @@ class LocalizationRepositoryImpl extends LocalizationRepository {
   static String localizationRepositoryKey = 'localization_repository_key';
 
   @override
-  Future<String> getLanguage() =>
-      getLanguageApiImpl(localizationRepositoryKey);
-  
+  Future<String> getLanguage() => getLanguageApiImpl(localizationRepositoryKey);
+
   @override
-  Future<Map<String, String>> getTranslations(String locale) => getTranslationsApiImpl(locale);
+  Future<Map<String, String>> getTranslations(String locale) =>
+      getTranslationsApiImpl(locale);
 }
