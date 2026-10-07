@@ -74,7 +74,8 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       ),
     };
 
-    return colorSchemeLight[widget.type] ?? colorSchemeLight[ButtonType.primary]!;
+    return colorSchemeLight[widget.type] ??
+        colorSchemeLight[ButtonType.primary]!;
   }
 
   void _handleOnTap() async {

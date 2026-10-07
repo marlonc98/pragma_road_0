@@ -8,14 +8,15 @@ class NoResultsWidget extends StatelessWidget {
   final String? title;
   final Widget? icon;
   final ButtonType buttonType;
-  const NoResultsWidget(
-      {super.key,
-      this.onRetry,
-      this.message,
-      this.retryText,
-      this.title,
-      this.icon,
-      this.buttonType = ButtonType.primary});
+  const NoResultsWidget({
+    super.key,
+    this.onRetry,
+    this.message,
+    this.retryText,
+    this.title,
+    this.icon,
+    this.buttonType = ButtonType.primary,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,8 @@ class NoResultsWidget extends StatelessWidget {
                     ? message!
                     : 'No se encontraron resultados',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[600],
-                    ),
+                style: Theme.of(context).textTheme.bodyMedium
+                    ?.copyWith(color: Colors.grey[600]),
               ),
             ),
             const SizedBox(height: 20),
@@ -51,10 +51,11 @@ class NoResultsWidget extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 child: ButtonWidget(
-                    fitContent: true,
-                    type: buttonType,
-                    onTap: onRetry!,
-                    text: retryText ?? 'Reintentar'),
+                  fitContent: true,
+                  type: buttonType,
+                  onTap: onRetry!,
+                  text: retryText ?? 'Reintentar',
+                ),
               ),
           ],
         ),

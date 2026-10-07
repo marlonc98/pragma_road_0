@@ -6,11 +6,14 @@ class ToggleHireDeveloperUseCase {
   final DeveloperRepository developerRepository;
   final DeveloperState developerState;
 
-  ToggleHireDeveloperUseCase({required this.developerRepository, required this.developerState});
-  
+  ToggleHireDeveloperUseCase({
+    required this.developerRepository,
+    required this.developerState,
+  });
+
   Future<PetitionStatusEntity<void>> toggleHiredStatus(bool hired) async {
     final response = await developerRepository.toggleHiredStatus(hired);
-    if(response.isSuccess){
+    if (response.isSuccess) {
       developerState.updateHiredStatus(hired);
     }
     return response;

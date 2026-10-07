@@ -6,7 +6,7 @@ class DeveloperEntity {
   final String? profileImageUrl;
   final String? bio;
   final List<String>? skills;
-  bool hired;
+  bool? hired;
 
   DeveloperEntity({
     required this.id,
@@ -15,7 +15,7 @@ class DeveloperEntity {
     required this.role,
     this.profileImageUrl,
     this.bio,
-    this.hired = false,
+    this.hired,
     this.skills,
   });
 }

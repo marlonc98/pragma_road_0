@@ -40,6 +40,7 @@ final loadUseCaseProvider = Provider<LoadUseCase>(
 final developerInfoUseCaseProvider = Provider<DeveloperInfoUseCase>(
   (ref) => DeveloperInfoUseCase(
     repository: ref.read(developerRepositoryProvider),
+    developerState: ref.read(developerStateProvider.notifier),
   ),
 );
 final toggleHireDeveloperUseCaseProvider = Provider<ToggleHireDeveloperUseCase>(

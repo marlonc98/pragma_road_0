@@ -34,10 +34,8 @@ class NoResultsSmallWidget extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 title ?? 'Sin resultados',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).textTheme.bodySmall
+                    ?.copyWith(color: Colors.grey, fontWeight: FontWeight.w600),
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -46,9 +44,8 @@ class NoResultsSmallWidget extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   message!,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodySmall?.copyWith(color: Colors.grey),
+                  style: Theme.of(context).textTheme.bodySmall
+                      ?.copyWith(color: Colors.grey),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

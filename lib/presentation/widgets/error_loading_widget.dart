@@ -20,18 +20,16 @@ class ErrorLoadingWidget extends StatelessWidget {
               error ?? 'Ocurrió un error',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.error,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Theme.of(context).colorScheme.error,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 32),
-            if (onRetry != null) SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
-              child: ButtonWidget(
-                onTap: onRetry!,
-                text: 'Reintentar',
+            if (onRetry != null)
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5,
+                child: ButtonWidget(onTap: onRetry!, text: 'Reintentar'),
               ),
-            )
           ],
         ),
       ),

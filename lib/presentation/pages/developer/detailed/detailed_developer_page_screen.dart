@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mi_perfil_dev/domain/entities/developer_entity.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/detailed_developer_page_view_model.dart';
+import 'package:mi_perfil_dev/presentation/pages/developer/detailed/widgets/define_application_widget.dart';
+import 'package:mi_perfil_dev/presentation/pages/developer/detailed/widgets/developer_skills_widget.dart';
 import 'package:mi_perfil_dev/presentation/widgets/loader_screen_widget.dart';
 
 class DetailedDeveloperPageScreen extends StatelessWidget {
@@ -24,15 +26,27 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context, DeveloperEntity developer) {
-    final imageHeight = MediaQuery.of(context).size.height * 0.4;
-    final placeholder = SizedBox(
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final imageHeight = (MediaQuery.of(context).size.height * 0.35).clamp(
+      220.0,
+      360.0,
+    );
+    final placeholder = Container(
       height: imageHeight,
       width: double.infinity,
-      child: const Icon(Icons.person, size: 120),
+      color: colorScheme.primary.withValues(alpha: 0.08),
+      child: Icon(
+        Icons.person,
+        size: 96,
+        color: colorScheme.primary.withValues(alpha: 0.4),
+      ),
     );
     final bio = developer.bio;
+    final skills = developer.skills;
+
     return ListView(
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.only(bottom: 32),
       children: [
         developer.profileImageUrl == null
             ? placeholder
@@ -41,22 +55,62 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
                 height: imageHeight,
                 width: double.infinity,
                 fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
                 errorBuilder: (_, _, _) => placeholder,
               ),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              for (final value in [developer.role, bio, developer.email])
-                if (value != null && value.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(
-                      value,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
+              if (developer.role.isNotEmpty)
+                Text(
+                  developer.role,
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.bold,
                   ),
+                ),
+              if (developer.email.isNotEmpty) ...[
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.mail_outline,
+                      size: 16,
+                      color: colorScheme.primary.withValues(alpha: 0.7),
+                    ),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        developer.email,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.primary.withValues(alpha: 0.7),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+              if (bio != null && bio.isNotEmpty) ...[
+                const SizedBox(height: 20),
+                Text(
+                  bio,
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    height: 1.5,
+                    color: colorScheme.onSurface.withValues(alpha: 0.85),
+                  ),
+                ),
+              ],
+              if (skills != null && skills.isNotEmpty) ...[
+                const SizedBox(height: 24),
+                DeveloperSkillsWidget(skills: skills),
+              ],
+              const SizedBox(height: 32),
+              DefineApplicationWidget(
+                hired: developer.hired,
+                onTap: vm.handleDefineApplication,
+              ),
             ],
           ),
         ),

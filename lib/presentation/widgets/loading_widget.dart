@@ -8,9 +8,7 @@ class LoadingWidget extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const CircularProgressIndicator(),
-        ],
+        children: [const CircularProgressIndicator()],
       ),
     );
   }

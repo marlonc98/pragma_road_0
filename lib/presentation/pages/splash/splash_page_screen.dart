@@ -42,9 +42,8 @@ class SplashPageScreen extends ConsumerWidget {
                         "build": vm.packageInfo!.buildNumber,
                       },
                     ),
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium
+                        ?.copyWith(color: Colors.white),
                   ),
                 ),
             ],

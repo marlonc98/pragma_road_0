@@ -40,7 +40,7 @@ class _ImageNetworkWithLoadWidgetState
   }
 
   Widget _buildDefaultOrSvg() {
-    if(widget.notShowDefaultImage) {
+    if (widget.notShowDefaultImage) {
       return const SizedBox.shrink();
     }
     if (widget.defaultImage != null) {
@@ -84,10 +84,10 @@ class _ImageNetworkWithLoadWidgetState
     return Image(
       image: _isWeb()
           ? NetworkImage(widget.imageUrl, headers: widget.headers)
-              as ImageProvider<Object>
+                as ImageProvider<Object>
           : (_isLocal()
-              ? AssetImage(widget.imageUrl) as ImageProvider<Object>
-              : FileImage(File(widget.imageUrl)) as ImageProvider<Object>),
+                ? AssetImage(widget.imageUrl) as ImageProvider<Object>
+                : FileImage(File(widget.imageUrl)) as ImageProvider<Object>),
       fit: widget.fit,
       width: widget.width,
       height: widget.height,

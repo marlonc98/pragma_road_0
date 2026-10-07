@@ -1,11 +1,6 @@
 import 'package:mi_perfil_dev/domain/constants/errors_constants.dart';
 
-enum PetitionStatus {
-  notStarted,
-  loading,
-  complete,
-  failed,
-}
+enum PetitionStatus { notStarted, loading, complete, failed }
 
 class PetitionStatusEntity<T> {
   PetitionStatus status;
@@ -21,18 +16,17 @@ class PetitionStatusEntity<T> {
   PetitionStatusEntity.notStarted() : status = PetitionStatus.notStarted;
 
   factory PetitionStatusEntity.success({T? data}) {
-    return PetitionStatusEntity(
-      status: PetitionStatus.complete,
-      data: data,
-    );
+    return PetitionStatusEntity(status: PetitionStatus.complete, data: data);
   }
 
   factory PetitionStatusEntity.loading() {
     return PetitionStatusEntity(status: PetitionStatus.loading);
   }
 
-  factory PetitionStatusEntity.fromError(dynamic error,
-      {String? defaultError}) {
+  factory PetitionStatusEntity.fromError(
+    dynamic error, {
+    String? defaultError,
+  }) {
     String? errorGetted;
     if (error.toString().contains("Operation timed out") ||
         error.toString().contains("SocketException") ||
@@ -64,11 +58,7 @@ class PetitionStatusEntity<T> {
   bool get isNotStarted => status == PetitionStatus.notStarted;
 
   PetitionStatusEntity changeStatus(PetitionStatus status) {
-    return PetitionStatusEntity(
-      status: status,
-      data: data,
-      error: error,
-    );
+    return PetitionStatusEntity(status: status, data: data, error: error);
   }
 
   PetitionStatusEntity setLoading() {
@@ -94,10 +84,7 @@ class PetitionStatusEntity<T> {
 
   PetitionStatusEntity<R> map<R>(R Function(T) transform) {
     if (isError) {
-      return PetitionStatusEntity<R>(
-        status: status,
-        error: error,
-      );
+      return PetitionStatusEntity<R>(status: status, error: error);
     }
     return PetitionStatusEntity<R>(
       status: status,

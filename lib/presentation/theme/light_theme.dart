@@ -22,10 +22,7 @@ ThemeData lightTheme = ThemeData.light().copyWith(
       fontWeight: FontWeight.bold,
       color: AppColors.main,
     ),
-    bodyMedium: TextStyle(
-      fontSize: 14,
-      color: AppColors.main,
-    ),
+    bodyMedium: TextStyle(fontSize: 14, color: AppColors.main),
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
