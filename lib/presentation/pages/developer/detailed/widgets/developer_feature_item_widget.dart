@@ -34,7 +34,9 @@ class DeveloperFeatureItemWidget extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
               const SizedBox(width: 5),
-              Text(value),
+              Flexible(
+                child: Text(value, overflow: TextOverflow.ellipsis),
+              ),
             ],
           ),
           Text(title, style: const TextStyle(fontSize: 10)),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mi_perfil_dev/domain/constants/errors_constants.dart';
+import 'package:mi_perfil_dev/domain/entities/developer_entity.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/detailed_developer_page_view_model.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/widgets/developer_feature_item_widget.dart';
+import 'package:mi_perfil_dev/presentation/widgets/loader_screen_widget.dart';
 
 class DetailedDeveloperPageScreen extends StatelessWidget {
   final DetailedDeveloperPageViewModel vm;
@@ -18,24 +19,14 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    if (vm.developer.isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-    final developer = vm.developer.data;
-    if (vm.developer.isError || developer == null) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(vm.developer.error ?? ErrorsConstants.unknownError),
-            TextButton(
-              onPressed: vm.handleLoadDeveloper,
-              child: const Text('Reintentar'),
-            ),
-          ],
-        ),
-      );
-    }
+    return LoaderScreenWidget<DeveloperEntity>(
+      status: vm.developer,
+      onRetry: vm.handleLoadDeveloper,
+      builder: _buildContent,
+    );
+  }
+
+  Widget _buildContent(BuildContext context, DeveloperEntity developer) {
     final imageHeight = MediaQuery.of(context).size.height * 0.4;
     final placeholder = SizedBox(
       height: imageHeight,

@@ -6,9 +6,11 @@ class LocalizationStateImpl extends Notifier<Map<String, String>>
     implements LocalizationState {
   @override
   Map<String, String> build() {
-    _load();
+    _loading = _load();
     return {};
   }
+
+  Future<void>? _loading;
 
   String _locale = 'es';
   @override
@@ -16,8 +18,11 @@ class LocalizationStateImpl extends Notifier<Map<String, String>>
   @override
   set locale(String locale) {
     _locale = locale;
-    _load();
+    _loading = _load();
   }
+
+  @override
+  Future<void> load() => _loading ??= _load();
 
   Future<void> _load() async {
     state = await ref

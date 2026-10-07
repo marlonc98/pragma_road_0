@@ -4,10 +4,11 @@ import 'package:mi_perfil_dev/domain/repositories/developer_repository.dart';
 
 DeveloperEntity fakeDeveloper = DeveloperEntity(
   id: '1',
-  name: 'Fake Developer',
-  email: 'fake.developer@example.com',
+  name: 'Marlon Alejandro Méndez Castañeda',
+  email: 'marlonmz1998@gmail.com',
   role: 'Flutter Developer',
-  bio: 'This is a fake developer',
+  bio: '',
+  profileImageUrl: 'https://media.licdn.com/dms/image/v2/D4E35AQHmOU9XPapnMg/profile-framedphoto-shrink_400_400/B4EaBivfoSG8AU-/0/1788363013087?e=1792018800&v=beta&t=gZ_zveVrq3d39nanCTFUki9dXyDRJPF-IA6GY5nHymc',
 );
 
 class DeveloperRepositoryMock extends DeveloperRepository {

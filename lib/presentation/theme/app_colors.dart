@@ -1,5 +1,5 @@
 import 'package:flutter/painting.dart';
 
 class AppColors {
-  static const Color brownMain = Color(0xFFBC6249);
+  static const Color main = Color.fromARGB(255, 13, 2, 94);
 }

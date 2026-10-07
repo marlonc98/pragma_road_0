@@ -3,12 +3,11 @@ import 'package:mi_perfil_dev/presentation/theme/app_colors.dart';
 
 ThemeData lightTheme = ThemeData.light().copyWith(
   colorScheme: const ColorScheme.light().copyWith(
-    primary: AppColors.brownMain,
-    onSurface: AppColors.brownMain,
+    primary: AppColors.main,
+    onSurface: AppColors.main,
   ),
-  scaffoldBackgroundColor: const Color(0xFFFFE6DF),
   appBarTheme: const AppBarTheme(
-    backgroundColor: AppColors.brownMain,
+    backgroundColor: AppColors.main,
     elevation: 0,
     iconTheme: IconThemeData(color: Colors.white),
     titleTextStyle: TextStyle(
@@ -21,16 +20,16 @@ ThemeData lightTheme = ThemeData.light().copyWith(
     titleMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.bold,
-      color: AppColors.brownMain,
+      color: AppColors.main,
     ),
     bodyMedium: TextStyle(
       fontSize: 14,
-      color: AppColors.brownMain,
+      color: AppColors.main,
     ),
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
-      backgroundColor: AppColors.brownMain,
+      backgroundColor: AppColors.main,
       foregroundColor: Colors.white,
       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     ),
