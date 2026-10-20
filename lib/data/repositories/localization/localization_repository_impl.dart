@@ -1,5 +1,5 @@
 import 'package:mi_perfil_dev/data/repositories/localization/api/get_language_api_impl.dart';
-import 'package:mi_perfil_dev/data/repositories/localization/api/get_translatations_api_impl.dart';
+import 'package:mi_perfil_dev/data/repositories/localization/api/get_translations_api_impl.dart';
 import 'package:mi_perfil_dev/domain/repositories/localization_repository.dart';
 
 class LocalizationRepositoryImpl extends LocalizationRepository {
