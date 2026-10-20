@@ -3,6 +3,7 @@ import 'package:mi_perfil_dev/domain/entities/developer_entity.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/detailed_developer_page_view_model.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/widgets/define_application_widget.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/widgets/developer_skills_widget.dart';
+import 'package:mi_perfil_dev/presentation/widgets/image_network_with_load_widget.dart';
 import 'package:mi_perfil_dev/presentation/widgets/loader_screen_widget.dart';
 
 class DetailedDeveloperPageScreen extends StatelessWidget {
@@ -50,13 +51,11 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
       children: [
         developer.profileImageUrl == null
             ? placeholder
-            : Image.network(
+            : ImageNetworkWithLoadWidget(
                 developer.profileImageUrl!,
                 height: imageHeight,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                alignment: Alignment.topCenter,
-                errorBuilder: (_, _, _) => placeholder,
               ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
