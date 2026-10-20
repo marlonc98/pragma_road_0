@@ -38,7 +38,6 @@ flutter doctor
 ### Plataformas soportadas
 
 - **Android** e **iOS**: plataformas objetivo de la app.
-- **Web, macOS, Linux y Windows**: las carpetas de plataforma están generadas, pero no son el foco del proyecto ni se han validado a fondo.
 
 No se necesita ningún API key ni archivo `.env`: hoy el perfil se sirve desde un repositorio mock (`DeveloperRepositoryMock`) y la decisión de contratación se guarda localmente con `shared_preferences`.
 
