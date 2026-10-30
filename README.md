@@ -189,6 +189,25 @@ En vez de exponer `Future<T>` crudo, los repositorios devuelven [AsyncState<T>](
 
 Los textos visibles no se escriben directo en los widgets. Se usan claves definidas en [TextConstants](lib/presentation/constants/text_constants.dart), y las traducciones viven en `assets/translate_dictionaries/<locale>.json` (hoy solo existe `es.json`). `LocalizationState.translate(key, values: {...})` busca la clave y reemplaza variables con la sintaxis `{variable}`, por ejemplo `"Versión {version} ({build})"`. Si una clave no existe en el JSON, se muestra la clave tal cual, así un texto faltante se detecta rápido.
 
+#### Variables en los textos
+
+En [TextConstants](lib/presentation/constants/text_constants.dart), algunas constantes tienen un comentario al final de la línea. Ese comentario lista los nombres de las variables que hay que enviar en `values` para que el sistema las inserte en el texto:
+
+```dart
+static const versionAndBuild = "versionAndBuild"; //version,build
+static const hiredPageDescription = "hiredPageDescription"; //name
+```
+
+Cada nombre corresponde a un `{variable}` del texto en el JSON, y se envía con la misma clave:
+
+```dart
+// es.json: "versionAndBuild": "Versión {version} ({build})"
+i18n(TextConstants.versionAndBuild, values: {'version': '1.0.0', 'build': '1'});
+// → "Versión 1.0.0 (1)"
+```
+
+Si una constante no tiene comentario, su texto no usa variables y basta con `i18n(TextConstants.clave)`. Si falta un valor en `values`, el `{variable}` queda sin reemplazar en pantalla.
+
 #### Cómo agregar otro idioma
 
 1. **Crear el diccionario**: copiar `assets/translate_dictionaries/es.json` como `<codigo>.json` (por ejemplo `en.json`) y traducir **todos** los valores sin cambiar las claves. No hay que tocar `pubspec.yaml`, porque ya registra la carpeta completa (`assets/translate_dictionaries/`).
@@ -203,7 +222,7 @@ Los textos visibles no se escriben directo en los widgets. Se usan claves defini
    - En [localization_state_impl.dart](lib/presentation/states/localization_state_impl.dart), el idioma inicial está fijo en `'es'`. Debe leerse con `LocalizationRepository.getLanguage()`, que ya devuelve el idioma guardado en `shared_preferences` o el idioma por defecto.
    - Agregar en el repositorio un método para guardar la elección bajo la clave `LocalizationRepositoryImpl.localizationRepositoryKey`, más un selector en la UI que lo llame y asigne `locale` en el estado. El setter de `locale` ya recarga las traducciones y redibuja los widgets que escuchan `localizationStateProvider`.
 
-Al agregar un texto nuevo, la clave debe ir en `TextConstants` y en **cada** JSON de idioma.
+Al agregar un texto nuevo, la clave debe ir en `TextConstants` y en **cada** JSON de idioma. Si el texto usa variables, agrega al final de la constante el comentario con sus nombres separados por comas (`//nombre1,nombre2`).
 
 ## Paquetes principales
 
