@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mi_perfil_dev/dependency_injection.dart';
-import 'package:mi_perfil_dev/domain/entities/petition_status_entity.dart';
+import 'package:mi_perfil_dev/domain/core/async_state.dart';
 import 'package:mi_perfil_dev/presentation/widgets/error_loading_widget.dart';
 import 'package:mi_perfil_dev/presentation/widgets/loading_widget.dart';
 import 'package:mi_perfil_dev/presentation/widgets/no_results_small_widget.dart';
@@ -10,7 +10,7 @@ import 'package:mi_perfil_dev/presentation/widgets/no_results_widget.dart';
 enum FullSizeOptions { inExpanded, inContainer, notFullSize }
 
 class LoaderScreenWidget<T> extends ConsumerWidget {
-  final PetitionStatusEntity<T> status;
+  final AsyncState<T> status;
   final bool noResultsScreen;
   final bool noResultsSmall;
   final FullSizeOptions fullSize;

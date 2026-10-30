@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mi_perfil_dev/dependency_injection.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/detailed_developer_page.dart';
 import 'package:mi_perfil_dev/presentation/pages/splash/splash_page.dart';
-import 'package:mi_perfil_dev/presentation/utils/view_model.dart';
+import 'package:mi_perfil_dev/presentation/core/view_model.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class SplashPageViewModel extends ViewModel<SplashPage> {

@@ -1,5 +1,5 @@
 import 'package:mi_perfil_dev/domain/entities/developer_entity.dart';
-import 'package:mi_perfil_dev/domain/entities/petition_status_entity.dart';
+import 'package:mi_perfil_dev/domain/core/async_state.dart';
 import 'package:mi_perfil_dev/domain/repositories/developer_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +9,6 @@ DeveloperEntity fakeDeveloper = DeveloperEntity(
   email: 'marlonmz1998@gmail.com',
   role: 'Flutter Developer',
   bio: 'Multimedia Engineer with over 6 years of experience in software development. Specialist in Flutter and React/TypeScript, with fluent English proficiency developed through direct collaboration with international companies. Expert in code architecture and scalability, with extensive experience in database management, implementation of integration testing, and knowledge in AI-driven development using Claude.',
-  // Imagen ilustrativa de Pixabay (ver README > Créditos de imágenes)
   profileImageUrl: 'assets/images/profile.jpg',
   skills: [
     'Flutter',
@@ -28,18 +27,18 @@ DeveloperEntity fakeDeveloper = DeveloperEntity(
 class DeveloperRepositoryMock extends DeveloperRepository {
   final String key = 'developer_hired_status';
   @override
-  Future<PetitionStatusEntity<DeveloperEntity>> getDeveloperInfo() async {
+  Future<AsyncState<DeveloperEntity>> getDeveloperInfo() async {
     await Future.delayed(const Duration(seconds: 1));
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? hired = prefs.getBool(key);
     fakeDeveloper.hired = hired;
-    return PetitionStatusEntity.success(data: fakeDeveloper);
+    return AsyncState.success(data: fakeDeveloper);
   }
 
   @override
-  Future<PetitionStatusEntity<void>> toggleHiredStatus(bool hired) async {
+  Future<AsyncState<void>> toggleHiredStatus(bool hired) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(key, hired);
-    return PetitionStatusEntity.success();
+    return AsyncState.success();
   }
 }

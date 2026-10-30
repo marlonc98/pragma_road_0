@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mi_perfil_dev/presentation/pages/splash/splash_page_screen.dart';
 import 'package:mi_perfil_dev/presentation/pages/splash/splash_page_view_model.dart';
-import 'package:mi_perfil_dev/presentation/utils/stf_view_model_adapter.dart';
+import 'package:mi_perfil_dev/presentation/core/stf_view_model_adapter.dart';
 
 class SplashPage extends StatefulWidget {
   static const String route = '/splash';

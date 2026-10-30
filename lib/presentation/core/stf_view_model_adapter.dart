@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mi_perfil_dev/presentation/utils/view_model.dart';
+import 'package:mi_perfil_dev/presentation/core/view_model.dart';
 
 class StfViewModelAdapter<T extends ViewModel> extends ConsumerStatefulWidget {
   final T Function(WidgetRef ref) create;

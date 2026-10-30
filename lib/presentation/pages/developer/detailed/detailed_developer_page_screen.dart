@@ -56,6 +56,7 @@ class DetailedDeveloperPageScreen extends StatelessWidget {
                 height: imageHeight,
                 width: double.infinity,
                 fit: BoxFit.cover,
+                
               ),
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),

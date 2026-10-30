@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mi_perfil_dev/dependency_injection.dart';
 import 'package:mi_perfil_dev/domain/entities/developer_entity.dart';
-import 'package:mi_perfil_dev/domain/entities/petition_status_entity.dart';
+import 'package:mi_perfil_dev/domain/core/async_state.dart';
 import 'package:mi_perfil_dev/presentation/pages/application_result/hired_page.dart';
 import 'package:mi_perfil_dev/presentation/pages/application_result/not_hired_page.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/detailed_developer_page.dart';
 import 'package:mi_perfil_dev/presentation/pages/developer/detailed/widgets/define_application_bottom_sheet.dart';
 import 'package:mi_perfil_dev/presentation/constants/text_constants.dart';
-import 'package:mi_perfil_dev/presentation/utils/view_model.dart';
+import 'package:mi_perfil_dev/presentation/core/view_model.dart';
 import 'package:mi_perfil_dev/presentation/widgets/confirmation_dialog_widget.dart';
 
 class DetailedDeveloperPageViewModel extends ViewModel<DetailedDeveloperPage> {
@@ -21,8 +21,8 @@ class DetailedDeveloperPageViewModel extends ViewModel<DetailedDeveloperPage> {
     handleLoadDeveloper();
   }
 
-  PetitionStatusEntity<DeveloperEntity> developer =
-      PetitionStatusEntity<DeveloperEntity>.loading();
+  AsyncState<DeveloperEntity> developer =
+      AsyncState<DeveloperEntity>.loading();
 
   void handleLoadDeveloper() async {
     developer = await ref.read(developerInfoUseCaseProvider).getDeveloperInfo();

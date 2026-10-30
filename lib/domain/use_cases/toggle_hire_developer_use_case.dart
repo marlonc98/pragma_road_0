@@ -1,4 +1,4 @@
-import 'package:mi_perfil_dev/domain/entities/petition_status_entity.dart';
+import 'package:mi_perfil_dev/domain/core/async_state.dart';
 import 'package:mi_perfil_dev/domain/repositories/developer_repository.dart';
 import 'package:mi_perfil_dev/domain/states/developer_state.dart';
 
@@ -11,7 +11,7 @@ class ToggleHireDeveloperUseCase {
     required this.developerState,
   });
 
-  Future<PetitionStatusEntity<void>> toggleHiredStatus(bool hired) async {
+  Future<AsyncState<void>> toggleHiredStatus(bool hired) async {
     final response = await developerRepository.toggleHiredStatus(hired);
     if (response.isSuccess) {
       developerState.updateHiredStatus(hired);

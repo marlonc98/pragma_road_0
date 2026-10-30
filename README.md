@@ -102,7 +102,7 @@ flowchart TB
         UseCase["UseCases<br/>DeveloperInfoUseCase, ToggleHireDeveloperUseCase, LoadUseCase"]
         RepoI["DeveloperRepository / LocalizationRepository<br/>(interfaces abstractas)"]
         StatesI["DeveloperState / LocalizationState<br/>(contratos de estado)"]
-        Entities["Entities<br/>DeveloperEntity, PetitionStatusEntity&lt;T&gt;"]
+        Entities["Entities<br/>DeveloperEntity, AsyncState&lt;T&gt;"]
         UseCase --> RepoI
         UseCase --> StatesI
         UseCase -.->|usa| Entities
@@ -126,7 +126,7 @@ flowchart TB
 ```
 lib/
 ├── domain/              # Reglas de negocio puras, sin Flutter ni detalles de almacenamiento
-│   ├── entities/         # DeveloperEntity, PetitionStatusEntity<T>
+│   ├── entities/         # DeveloperEntity, AsyncState<T>
 │   ├── repositories/     # Contratos abstractos (DeveloperRepository, LocalizationRepository)
 │   ├── use_cases/        # Una operación de negocio por clase (DeveloperInfoUseCase, ToggleHireDeveloperUseCase, LoadUseCase)
 │   ├── states/           # Contratos de estado global (DeveloperState, LocalizationState)
@@ -177,9 +177,9 @@ Para mantener los widgets separados de su lógica, cada pantalla se divide en tr
 
 [StfViewModelAdapter](lib/presentation/utils/stf_view_model_adapter.dart) es el pegamento: un `ConsumerStatefulWidget` que crea el `ViewModel` una sola vez, lo reconstruye con `ListenableBuilder` y lo libera en `dispose`.
 
-### Manejo de resultados asíncronos: `PetitionStatusEntity<T>`
+### Manejo de resultados asíncronos: `AsyncState<T>`
 
-En vez de exponer `Future<T>` crudo, los repositorios devuelven [PetitionStatusEntity<T>](lib/domain/entities/petition_status_entity.dart): un wrapper con `status` (`notStarted` / `loading` / `complete` / `failed`), `data` y `error`. Así la UI representa los cuatro estados de una petición de forma explícita.
+En vez de exponer `Future<T>` crudo, los repositorios devuelven [AsyncState<T>](lib/domain/core/async_state.dart): un wrapper con `status` (`notStarted` / `loading` / `complete` / `failed`), `data` y `error`. Así la UI representa los cuatro estados de una petición de forma explícita.
 
 [LoaderScreenWidget<T>](lib/presentation/widgets/loader_screen_widget.dart) traduce ese estado en UI (loading / error con reintentar / sin resultados / contenido). Su `builder` recibe el dato **ya desenvuelto y no nulo**, así las pantallas nunca hacen `data!`. Los errores se muestran traducidos a partir de las claves de [ErrorsConstants](lib/domain/constants/errors_constants.dart), nunca como texto crudo de una excepción.
 
@@ -228,7 +228,7 @@ Si en el futuro se agrega un secreto (por ejemplo un API key), debe ir en `.env`
 
 - El perfil del desarrollador está quemado en `DeveloperRepositoryMock`; el siguiente paso natural es una implementación conectada a un backend.
 - La app está solo en español (`es`). Para agregar idiomas falta conectar el idioma guardado al estado y crear un selector; ver [Cómo agregar otro idioma](#cómo-agregar-otro-idioma).
-- Los tests actuales son de widgets sobre el flujo principal; faltan tests unitarios de casos de uso y de `PetitionStatusEntity`.
+- Los tests actuales son de widgets sobre el flujo principal; faltan tests unitarios de casos de uso y de `AsyncState`.
 
 ## Créditos de imágenes
 
